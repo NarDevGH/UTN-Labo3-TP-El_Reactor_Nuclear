@@ -1,2 +1,10 @@
-# UTN-Labo3-TP-El_Reactor_Nuclear
-Repositorio del Grupo Nro.6 que contiene la entrega del TP - El Reactor Nuclear.
+# ☢️ Trabajo Práctico - El Reactor Nuclear ☢️
+
+![failed_to_load_img](./imgs/image.png)
+
+
+## Participantes:
+- Fredes Matias
+- Cobuzzi Macarena
+- Correa Bahia
+- Mateo	Bautista
