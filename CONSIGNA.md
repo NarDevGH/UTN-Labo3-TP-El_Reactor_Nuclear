@@ -68,8 +68,8 @@ verificar:
     5. Conocer la temperatura del reactor en todo momento.
     6. Conocer la cantidad de energia neta (MWe) producida en todo momento.
 
-#### Requerimientos adicionales:
-Desarrollar las pruebas unitarias para cada método realizado.
-El porcentaje de código cubierto por pruebas unitarias debe superar el 80%.
-Agregar archivo README.md al proyecto describiendo el proyecto, agregar instrucciones para su compilación y
+### Requerimientos adicionales:
+- Desarrollar las pruebas unitarias para cada método realizado.
+- El porcentaje de código cubierto por pruebas unitarias debe superar el 80%.
+- Agregar archivo README.md al proyecto describiendo el proyecto, agregar instrucciones para su compilación y
 funcionamiento.
