@@ -27,5 +27,5 @@ npm i
 ```
 3. Una vez haya finalizado de instalar todos los paquetes, ejecutar el siguiente commando para iniciar el programa:
 ```bash
-npm start:dev
+npm run start:dev
 ```
