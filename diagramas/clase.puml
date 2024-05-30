@@ -1,9 +1,35 @@
 @startuml Diagrama Clase
 
+skinparam linetype ortho
+skinparam arrow {
+    Thickness 1
+}
+skinparam TitleFontSize 20
+
 title Diagrama Clase
 
-interface hola{
-    
+class Reactor {
+- tempActual: number
+- tempNorMin: number = 280
+- tempNorMax: number = 330
+
+' setters y getters
++ sitCritica(): boolean
++ genEnergia(): number
+}
+
+class BarrasControl {
+- tiempoVida: number
+
++ redEnerTerm(): number
+}
+
+class AlertaEnfr {
+    - reactor: Reactor
+    - barrasControl: BarrasControl
+
+    + verificarTemp(): void
+    + genEnerAjust(): number
 }
 
 @enduml
