@@ -8,28 +8,65 @@ skinparam TitleFontSize 20
 
 title Diagrama Clase
 
+interface SubscriberReactor{
+    + update(temperatura)
+}
+
 class Reactor {
 - tempActual: number
-- tempNorMin: number = 280
-- tempNorMax: number = 330
+- subscribers: List<SubscriberReactor>
 
-' setters y getters
-+ sitCritica(): boolean
-+ genEnergia(): number
++ subscribe(s: Subscriber)
++ unsubscribe(s: Subscriber)
++ notifySubscribers()
+
 }
 
-class BarrasControl {
+class BarraControl {
 - tiempoVida: number
 
-+ redEnerTerm(): number
++ getTiempoDeVida(): number
++ getRedEnerTerm(): number
 }
 
-class AlertaEnfr {
+class ControladorBarrasDeControl{
+    - barrasDeControl: List<BarraDeControl>
+
+    + getBarrasDeControl(): List<BarraDeControl>
+    + utilizarBarraDeControl(index: number): Resultado
+    + retirarBarraDeControl(index: number): Resultado
+    + remplazarBarraDeControl(index: number, BarraDeControl): Resultado
+
+    + utilizarBarrasDeControl(): Resultado
+    + retirarBarrasDeControl(): Resultado
+}
+
+class SensorTemperaturaReactor extends SubscriberReactor{
+    - temperatura: number
+    
+    + getTemperatura(): number
+
+    + update(temperatura)
+}
+
+class Sistema{
     - reactor: Reactor
-    - barrasControl: BarrasControl
+    - sensorTemperaturaReactor: CensorTemperaturaReactor
+    - controladorBarrasDeControl: ControladorBarrasDeControl
 
-    + verificarTemp(): void
-    + genEnerAjust(): number
+    - tempNorMin: number = 280
+    - tempNorMax: number = 330
+    
+    + sitCritica(): boolean
+
+    + getTemperatura(): number
+    + getTemperaturaReactor(): number
+    + getEnergiaGenerada(): number
 }
 
+Reactor <-- Sistema
+SensorTemperaturaReactor <-- Sistema
+ControladorBarrasDeControl <-- Sistema
+
+BarraControl <-- ControladorBarrasDeControl
 @enduml
