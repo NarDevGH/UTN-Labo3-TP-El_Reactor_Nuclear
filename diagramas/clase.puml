@@ -68,5 +68,6 @@ Reactor <-- Sistema
 SensorTemperaturaReactor <-- Sistema
 ControladorBarrasDeControl <-- Sistema
 
+SubscriberReactor <.. Reactor
 BarraControl <-- ControladorBarrasDeControl
 @enduml
