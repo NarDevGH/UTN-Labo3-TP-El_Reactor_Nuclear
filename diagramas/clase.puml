@@ -1,35 +1,50 @@
-@startuml Diagrama Clase
+@startuml
 
-skinparam linetype ortho
-skinparam arrow {
-    Thickness 1
-}
-skinparam TitleFontSize 20
+skinparam Linetype ortho
 
-title Diagrama Clase
+title "Diagrama de clases - Planta Nuclear"
 
-class Reactor {
-- tempActual: number
-- tempNorMin: number = 280
-- tempNorMax: number = 330
-
-' setters y getters
-+ sitCritica(): boolean
-+ genEnergia(): number
+interface EstadoReactor {
+    +controlEnergia(barrasDeControl: List<BarraControl>)
 }
 
-class BarrasControl {
-- tiempoVida: number
 
-+ redEnerTerm(): number
+class EstadoCriticidad implements EstadoReactor{
+    +controlEnergia(barrasDeControl: List<BarraControl>)
 }
 
-class AlertaEnfr {
-    - reactor: Reactor
-    - barrasControl: BarrasControl
-
-    + verificarTemp(): void
-    + genEnerAjust(): number
+class EstadoCritico implements EstadoReactor{
+    +controlEnergia(barrasDeControl: List<BarraControl>)
 }
+
+class EstadoNormal implements EstadoReactor{}
+
+
+
+class Operario {
+
+    + notificar()
+    + activarMecanismosEnf()
+}
+
+' uso de Facade 
+class CentralNuclearFacade {
+    -temperaturaActual: double
+    -barrasDeControl: List<BarraControl>
+    -estadoActual: EstadoReactor
+    -alerta: String
+
+    +CentralNuclearFacade(temperaturaActual: double, barrasDeControl: List<BarraControl>)
+    +verificarTemperatura()
+    +cambiarEstado(nuevoEstado: EstadoReactor)
+}
+
+
+
+
+EstadoCritico ..> BarraControl
+EstadoCriticidad ..> BarraControl
+
+EstadoReactor -->  CentralNuclearFacade
 
 @enduml
