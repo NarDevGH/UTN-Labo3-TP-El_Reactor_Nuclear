@@ -1,6 +1,6 @@
 {
     "plantuml.server": "https://www.plantuml.com/plantuml",
-    "plantuml.exportOutDir": "",
+    "plantuml.exportOutDir": "./diagramas",
     "plantuml.diagramsRoot": "./diagramas",
     "plantuml.exportFormat": "png",
     "plantuml.render": "PlantUMLServer"
