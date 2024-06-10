@@ -69,6 +69,7 @@ class estadoCriticidad implements Estado {
         } else {
             // Si la temperatura está entre 330 y 400 grados, estamos en estado de criticidad
             // Reducir la capacidad de energía producida en un 80%
+
             // Enviar alerta a los observadores para activar el control de enfriamiento
             // Llamar a activarMecanismosEnf(dentro de trabajador)
             reactor.notificarCriticidad();//a Homero y compañeros
@@ -109,5 +110,3 @@ class BarraControl {
 }
 
 //Falta ver observadores y las barras de control
-
-
