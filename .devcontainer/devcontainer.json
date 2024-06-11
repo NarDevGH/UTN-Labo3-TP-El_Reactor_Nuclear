@@ -19,7 +19,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"jebbs.plantuml"
+				"jebbs.plantuml",
+				"ms-vsliveshare.vsliveshare"
 			]
 		}
 	},
