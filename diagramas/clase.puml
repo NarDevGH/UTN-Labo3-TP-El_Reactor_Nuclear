@@ -9,6 +9,7 @@ interface EstadoReactor {
 }
 
 
+
 class EstadoCriticidad implements EstadoReactor{
     +controlEnergia(barrasDeControl: List<BarraControl>)
 }
@@ -46,5 +47,69 @@ EstadoCritico ..> BarraControl
 EstadoCriticidad ..> BarraControl
 
 EstadoReactor -->  CentralNuclearFacade
+
+
+interface SubscriberReactor{
+    + update(temperatura)
+}
+
+class Reactor {
+- tempActual: number
+- subscribers: List<SubscriberReactor>
+
++ subscribe(s: Subscriber)
++ unsubscribe(s: Subscriber)
++ notifySubscribers()
+
+}
+
+class BarraControl {
+- tiempoVida: number
+
++ getTiempoDeVida(): number
++ getRedEnerTerm(): number
+}
+
+class ControladorBarrasDeControl{
+    - barrasDeControl: List<BarraDeControl>
+
+    + getBarrasDeControl(): List<BarraDeControl>
+    + utilizarBarraDeControl(index: number): Resultado
+    + retirarBarraDeControl(index: number): Resultado
+    + remplazarBarraDeControl(index: number, BarraDeControl): Resultado
+
+    + utilizarBarrasDeControl(): Resultado
+    + retirarBarrasDeControl(): Resultado
+}
+
+class SensorTemperaturaReactor extends SubscriberReactor{
+    - temperatura: number
+    
+    + getTemperatura(): number
+
+    + update(temperatura)
+}
+
+class Sistema{
+    - reactor: Reactor
+    - sensorTemperaturaReactor: CensorTemperaturaReactor
+    - controladorBarrasDeControl: ControladorBarrasDeControl
+
+    - tempNorMin: number = 280
+    - tempNorMax: number = 330
+    
+    + sitCritica(): boolean
+
+    + getTemperatura(): number
+    + getTemperaturaReactor(): number
+    + getEnergiaGenerada(): number
+}
+
+Reactor <-- Sistema
+SensorTemperaturaReactor <-- Sistema
+ControladorBarrasDeControl <-- Sistema
+
+SubscriberReactor <.. Reactor
+BarraControl <-- ControladorBarrasDeControl
 
 @enduml
