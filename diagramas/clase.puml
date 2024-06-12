@@ -1,12 +1,53 @@
-@startuml Diagrama Clase
+@startuml diagrama
 
-skinparam linetype ortho
-skinparam arrow {
-    Thickness 1
+skinparam Linetype ortho
+
+title "Diagrama de clases - Planta Nuclear"
+
+interface EstadoReactor {
+    +controlEnergia(barrasDeControl: List<BarraControl>)
 }
-skinparam TitleFontSize 20
 
-title Diagrama Clase
+
+
+class EstadoCriticidad implements EstadoReactor{
+    +controlEnergia(barrasDeControl: List<BarraControl>)
+}
+
+class EstadoCritico implements EstadoReactor{
+    +controlEnergia(barrasDeControl: List<BarraControl>)
+}
+
+class EstadoNormal implements EstadoReactor{}
+
+
+
+class Operario {
+
+    + notificar()
+    + activarMecanismosEnf()
+}
+
+' uso de Facade 
+class CentralNuclearFacade {
+    -temperaturaActual: double
+    -barrasDeControl: List<BarraControl>
+    -estadoActual: EstadoReactor
+    -alerta: String
+
+    +CentralNuclearFacade(temperaturaActual: double, barrasDeControl: List<BarraControl>)
+    +verificarTemperatura()
+    +cambiarEstado(nuevoEstado: EstadoReactor)
+}
+
+
+
+
+EstadoCritico ..> BarraControl
+EstadoCriticidad ..> BarraControl
+
+EstadoReactor -->  CentralNuclearFacade
+
 
 interface SubscriberReactor{
     + update(temperatura)
@@ -70,4 +111,5 @@ ControladorBarrasDeControl <-- Sistema
 
 SubscriberReactor <.. Reactor
 BarraControl <-- ControladorBarrasDeControl
+
 @enduml
