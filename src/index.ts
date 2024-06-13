@@ -91,7 +91,7 @@ interface Observador {
     update(temperature: number): void;
 }
 
-class Operario implements Observador {
+class ObservadorOperario implements Observador {
     public update(temperature: number) {
         if (temperature > 330) {
             console.log('Alerta activar metodo enfriamiento');
@@ -99,7 +99,7 @@ class Operario implements Observador {
     }
 }
 
-class Directivo implements Observador {
+class ObservadorDirectivo implements Observador {
     public update(temperature: number) {
         if (temperature === 0) {
             console.log('Alerta al jefe: El reactor se ha apagado.');
