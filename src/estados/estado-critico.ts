@@ -1,3 +1,4 @@
+import Reactor from "../reactor/reactor";
 import { Estado } from "./estado";
 
 export default class EstadoNormal implements Estado{
