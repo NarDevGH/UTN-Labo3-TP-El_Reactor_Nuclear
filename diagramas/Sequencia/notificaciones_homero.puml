@@ -1,0 +1,12 @@
+@startuml Diagrama de Notificaciones para Homero
+
+actor Homero
+participant "ReceptorNotificacion"
+participant "EstadoCriticidad"
+
+Homero -> "EstadoCriticidad" : addObservador()
+"EstadoCriticidad" -> "ReceptorNotificacion" : recibirNotificacion()
+
+Homero -> "ReceptorNotificacion": leerNotificacion()
+
+@enduml

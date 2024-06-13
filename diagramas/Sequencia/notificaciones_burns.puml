@@ -1,0 +1,12 @@
+@startuml Diagrama de Notificaciones para Burns
+
+actor Burns
+participant "ReceptorNotificacion"
+participant "EstadoApagado"
+
+Burns -> "EstadoApagado" : addObservador()
+"EstadoApagado" -> "ReceptorNotificacion" : recibirNotificacion()
+
+Burns -> "ReceptorNotificacion": leerNotificacion()
+
+@enduml
