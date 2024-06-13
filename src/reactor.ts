@@ -1,13 +1,24 @@
 
-// Principio SOLID: Open/Closed Principle
+import Notificacion from "./notificacion";
+import { ReceptorNotificacion } from "./notificacion";
+
 abstract class EstadoReactor {
-    private temperatura!: number;
-    private observadores: Observador[] = []
+    protected reactor: Reactor;
+    protected temperatura!: number;
 
-    abstract getTemperatura(): number;
-    abstract setTemperatuar(n:Number): void;
+    private mensajeNotificacion: string = "";
+    private observadores: ReceptorNotificacion[] = []
 
-    public addObservador(observador: Observador) {
+    constructor(reactor: Reactor){
+        this.reactor = reactor
+    }
+
+    abstract setTemperatuar(n:number): void;
+    public getTemperatura(): number{
+        return this.temperatura;
+    }
+
+    public addObservador(observador: ReceptorNotificacion) {
         if(this.observadores.includes(observador)){
             console.log("Error: Observadores ya contienen el obervador pasado por parametro")
         }
@@ -16,7 +27,7 @@ abstract class EstadoReactor {
         }
     }
 
-    public removeObservador(observador: Observador){
+    public removeObservador(observador: ReceptorNotificacion){
         if(this.observadores.includes(observador)){
             this.observadores = this.observadores.filter(x => x!= observador);
         }
@@ -25,62 +36,50 @@ abstract class EstadoReactor {
         }
     }
 
+    public setMensajeNotificacion(mensaje: string){
+        this.mensajeNotificacion = mensaje;
+    }
+
     public notificarObservadores() {
         for (const observador of this.observadores) {
-            observador.update(this.temperatura);
+            observador.recibirNotificacion(new Notificacion(this.mensajeNotificacion));
         }
     }
 }
 
-class EstadoNormal implements EstadoReactor {
+export class EstadoNormal extends EstadoReactor {
 
-    protected getTemperatura(): number;
-    protected setTemperatuar(n:Number): void;
-
-    public manejaCambioTemperatura(reactor: Reactor) {
-        if (reactor.getTemperatura() > 330) {
-            reactor.setEstado(new estadoCriticidad());
+    public setTemperatuar(n:number): void{
+        this.temperatura = n;
+        if (this.temperatura > 330) {
+            this.reactor.setEstado(new EstadoCriticidad(this.reactor));
         }
     }
 }
 
-class EstadoCriticidad implements EstadoReactor {
-    protected getTemperatura(): number;
-    protected setTemperatuar(n:Number): void;
-
-    public manejaCambioTemperatura(reactor: Reactor) {
-        if (reactor.getTemperatura() > 400) {
-            reactor.setEstado(new estadoCritico()); 
-        } else {
-            // Si la temperatura está entre 330 y 400 grados, estamos en EstadoReactor de criticidad
-            // Reducir la capacidad de energía producida en un 80%
-
-            // Enviar alerta a los observadores para activar el control de enfriamiento
-            // Llamar a activarMecanismosEnf(dentro de trabajador)
-            reactor.notificarCriticidad();//a Homero y compañeros
-        }
+export class EstadoCriticidad extends EstadoReactor {
+    public setTemperatuar(n:number): void
+    {
+        this.temperatura = n;
+        if (this.temperatura > 400) {
+            this.reactor.setEstado(new EstadoCritico(this.reactor)); 
+        } 
     }
 }
 
-class EstadoCritico implements EstadoReactor {
-    protected getTemperatura(): number;
-    protected setTemperatuar(n:Number): void;
-
-    public manejaCambioTemperatura(reactor: Reactor) {
-        reactor.notificarCritico(); 
+export class EstadoCritico extends EstadoReactor {
+    public setTemperatuar(n:number): void{
+        this.reactor.setEstado(new EstadoApagado(this.reactor));
     }
 }
 
-class EstadoApagado implements EstadoReactor {
-    protected getTemperatura(): number;
-    protected setTemperatuar(n:Number): void;
-
-    public manejaCambioTemperatura(reactor: Reactor) {
-        reactor.notificarCritico(); //a Mongomery
+export class EstadoApagado extends EstadoReactor {
+    public setTemperatuar(n:number): void{
+        console.log("Error: El reactor se encuentra apagado")
     }
 }
 
-export class Reactor {
+export default class Reactor {
     private estado!: EstadoReactor;
 
     constructor(estado?:EstadoReactor) {
@@ -88,14 +87,14 @@ export class Reactor {
             this.estado = estado;
         }
         else{
-            this.estado = new EstadoApagado()
+            this.estado = new EstadoApagado(this)
         }
     }
 
-    public getTemperatura():Number{
+    public getTemperatura():number{
         return this.estado.getTemperatura()
     }
-    public setTemperatura(n:Number):void{
+    public setTemperatura(n:number):void{
         return this.estado.setTemperatuar(n)
     }
 
