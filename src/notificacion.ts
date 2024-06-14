@@ -1,6 +1,3 @@
-export interface ReceptorNotificacion{
-    recibirNotificacion(notificacion: Notificacion):void
-}
 
 export default class Notificacion{
     private contenido: string
@@ -12,4 +9,6 @@ export default class Notificacion{
     public getContenido():string{
         return this.contenido;
     }
+
 }
+
