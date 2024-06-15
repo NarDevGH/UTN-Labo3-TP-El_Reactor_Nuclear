@@ -1,17 +1,28 @@
 import Reactor from "../reactor/reactor";
+import { ResultadoEnergia } from "../types/constants";
 import { Estado } from "./estado";
 
-export default class EstadoNormal implements Estado{
+export default class EstadoCritico extends Estado{
     public manejaCambioTemperatura(reactor: Reactor) {
-        reactor.notificarCritico(); //a Mongomery
+        let NuevaTemp: number = 0;
+        reactor.getBarrasDeControl().forEach(valor => {
+            while (NuevaTemp > 330 && reactor.getBarrasDeControl.length > 0) {
+            NuevaTemp = (valor.tiempoVida/3600)*100;
+            }
+        });
+        reactor.setTemperatura(NuevaTemp)
     }
 
-    calcularEnergia(temperatura: number): { termal: number; neta: number } {
-        // Usamos las ecuaciones lineales para calcular la energía termal y neta
-        const energiaTermal = 0;
-        const energiaNeta = 0;
-    
-        return { termal: energiaTermal, neta: energiaNeta };
-      }
+    generarEnergia(temperatura: number): ResultadoEnergia {
+        const resultado = this.calcularEnergia (temperatura);
+        resultado.termal = resultado.termal*0;
+        resultado.neta = resultado.neta*0;
+        return resultado;
+    }
+
+    public notificar(reactor: Reactor) {
+        for (const observador of reactor.getObservadorDirectivo()) {
+            observador.update(reactor.getTemperatura());
+        }
     }
 }

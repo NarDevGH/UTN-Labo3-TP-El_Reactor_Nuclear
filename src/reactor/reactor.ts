@@ -2,58 +2,63 @@ import { Observador } from "../observadores/observador";
 import { Estado } from "../estados/estado";
 import ObservadorOperario from "../observadores/observador-operario";
 import ObservadorDirectivo from "../observadores/observador-directivo";
-// agregar import barra control
+import { BarrasControl } from "../barras_control";
 
 
 export default class Reactor {
-    private temperatura: number;
-    private observadorOperario: Observador[] = [];
-    private observadorDirectivo: Observador[] = [];
+    private _temperatura: number;
+    private _observadorOperario: Observador[] = [];
+    private _observadorDirectivo: Observador[] = [];
     private estado: Estado;
-    private barrasDeControl: BarraControl[] = [];
-
-    // revisar constructor
+    private _barrasDeControl: BarrasControl[] = [];
+    
+    
+    
+    // Constructor
     constructor(temperatura: number, estado: Estado) {
-        this.temperatura = temperatura;
+        this._temperatura = temperatura;
         this.estado = estado;
-        this.observadorOperario.push(new ObservadorOperario());
-        this.observadorDirectivo.push(new ObservadorDirectivo());
+        this._observadorOperario.push(new ObservadorOperario());
+        this._observadorDirectivo.push(new ObservadorDirectivo());
+        this._barrasDeControl.push(new BarrasControl());
     }
-
+    
+    // Modificar Temperatura
     public cambiarTemperatura(newTemperatura: number) {
-        this.temperatura = newTemperatura;
+        this._temperatura = newTemperatura;
         this.estado.manejaCambioTemperatura(this);
     }
-
-    // metodos para añadir operarios o directivos
+    
+    // Metodos añadir Observadores
     public addObservadorOperario(observador: Observador) {
-        this.observadorOperario.push(observador);
+        this._observadorOperario.push(observador);
     }
-
+    
     public addObservadorDirectivo(observador: Observador) {
-        this.observadorDirectivo.push(observador);
+        this._observadorDirectivo.push(observador);
     }
-
-    // metodo para generar alerta Operarios
-    public notificarCriticidad() {
-        for (const observador of this.observadorOperario) {
-            observador.update(this.temperatura);
-        }
-    }
-
-    // metodo para generar alerta Directivos
-    // Esta notificación suponiendo que los operarios solo tengan 1 aviso a partir de los 330°
-    public notificarCritico(){
-        for (const observador of this.observadorDirectivo) {
-            observador.update(this.temperatura);
-        }
-    }
-
+    
     public setEstado(newEstado: Estado){
         this.estado = newEstado;
     }
-
+    
     public getTemperatura(): number {
-        return this.temperatura;
+        return this._temperatura;
     }
+    public setTemperatura(value: number) {
+        this._temperatura = value;
+    }
+    
+    public getObservadorOperario(): Observador[] {
+        return this._observadorOperario;
+    }
+    
+    public getObservadorDirectivo(): Observador[] {
+        return this._observadorDirectivo;
+    }
+    
+    public getBarrasDeControl(): BarrasControl[] {
+        return this._barrasDeControl;
+    }
+    
 }

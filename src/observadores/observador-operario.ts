@@ -6,4 +6,6 @@ export default class ObservadorOperario implements Observador{
             console.log('Alerta activar metodo enfriamiento');
         }
     }
+
+  
 }

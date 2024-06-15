@@ -1,34 +1,35 @@
+import Reactor from "../reactor/reactor";
+import { ResultadoEnergia } from "../types/constants";
 import { Estado } from "./estado";
+import EstadoCritico from "./estado-critico";
 
-export default class EstadoNormal implements Estado{
-    public manejaCambioTemperatura(reactor: Reactor) {
+export default class EstadoCriticidad extends Estado{
+    manejaCambioTemperatura(reactor: Reactor) {
+        let NuevaTemp: number = 0;
         if (reactor.getTemperatura() > 400) {
-            reactor.setEstado(new estadoCritico()); 
+            reactor.setEstado(new EstadoCritico()); 
         } else {
-            // Si la temperatura está entre 330 y 400 grados, estamos en estado de criticidad
-            // Reducir la capacidad de energía producida en un 80%
-
-            // Enviar alerta a los observadores para activar el control de enfriamiento
-            // Llamar a activarMecanismosEnf(dentro de trabajador)
-            reactor.notificarCriticidad();//a Homero y compañeros
+            reactor.getBarrasDeControl().forEach(valor => {
+                while (NuevaTemp <= reactor.getTemperatura() && reactor.getBarrasDeControl.length > 0) {
+                NuevaTemp = (valor.tiempoVida/3600)*100;
+                }
+            });
+            reactor.setTemperatura(NuevaTemp)
         }
     }
-    generarEnergia(temperatura: number): { termal: number; neta: number } {
-        // Calculamos la pendiente (m) y el intercepto (b) para la energía termal
-        const mTermal = (2500.02 - 2100.0) / (329.98 - 280.00);
-        const bTermal = 2100.0 - mTermal * 280.00;
     
-        // Calculamos la pendiente (m) y el intercepto (b) para la energía neta
-        const mNeta = (700.00 - 100.00) / (329.98 - 280.00);
-        const bNeta = 100.00 - mNeta * 280.00;
-    
-        // Usamos las ecuaciones lineales para calcular la energía termal y neta
-        const energiaTermal = (mTermal * temperatura + bTermal)*0.2;
-        const energiaNeta = (mNeta * temperatura + bNeta)*0.2;
-    
-
-        return { termal: energiaTermal, neta: energiaNeta };
-      }
+    public generarEnergia(temperatura: number): ResultadoEnergia {
+        const resultado = this.calcularEnergia (temperatura);
+        resultado.termal = resultado.termal*0.2;
+        resultado.neta = resultado.neta*0.2;
+        return resultado;
     }
+
+    public notificar(reactor: Reactor) {
+        for (const observador of reactor.getObservadorOperario()) {
+            observador.update(reactor.getTemperatura());
+        }
+    }
+
 }
 
