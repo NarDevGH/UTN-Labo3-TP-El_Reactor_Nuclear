@@ -11,7 +11,7 @@ export default class EstadoCriticidad extends Estado{
         } else {
             reactor.getBarrasDeControl().forEach(valor => {
                 while (NuevaTemp <= reactor.getTemperatura() && reactor.getBarrasDeControl.length > 0) {
-                NuevaTemp = (valor.tiempoVida/3600)*100;
+                NuevaTemp = reactor.getTemperatura() - (valor.tiempoVida/3600)*100;
                 }
             });
             reactor.setTemperatura(NuevaTemp)

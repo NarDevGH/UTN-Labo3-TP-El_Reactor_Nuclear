@@ -7,7 +7,7 @@ export default class EstadoCritico extends Estado{
         let NuevaTemp: number = 0;
         reactor.getBarrasDeControl().forEach(valor => {
             while (NuevaTemp > 330 && reactor.getBarrasDeControl.length > 0) {
-            NuevaTemp = (valor.tiempoVida/3600)*100;
+            NuevaTemp = reactor.getTemperatura() - (valor.tiempoVida/3600)*100;
             }
         });
         reactor.setTemperatura(NuevaTemp)
