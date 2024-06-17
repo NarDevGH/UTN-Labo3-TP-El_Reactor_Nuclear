@@ -1,8 +1,8 @@
 import Reactor from "../reactor";
-import Notificacion from "../../notificacion";
+import Notificacion from "../../Notificacion/notificacion";
 import EstadoCritico from "./EstadoCritico";
 import EstadoReactor from "./EstadoReactor";
-import { InteresesEstadoReactor } from "../../Persona/persona";
+import InteresesEstadoReactor from "../../types/interesesEstadoReactor";
 
 
 export default class EstadoCriticidad extends EstadoReactor {

@@ -11,6 +11,6 @@ export default class EstadoCritico extends EstadoReactor {
     }
 
     protected energiaModificadaPorEstado(energia: number): number {
-        throw new Error("Method not implemented.");
+        return energia
     }
 }

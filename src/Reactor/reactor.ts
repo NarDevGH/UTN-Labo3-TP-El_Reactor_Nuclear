@@ -1,11 +1,11 @@
 import EstadoReactor from "./Estados/EstadoReactor";
 import EstadoApagado from "./Estados/EstadoApagado";
-import InteresadoEnCambioDeEstadoReactor from "../Persona/InteresadoEnCambioDeEstadoReactor";
+import ObvservadorEstadoReactor from "../ObservadorEstadoReactor/observadorEstadoReactor";
 
 
 export default class Reactor {
     private estado!: EstadoReactor;
-    public observadores: InteresadoEnCambioDeEstadoReactor[] = []
+    public observadores: ObvservadorEstadoReactor[] = []
 
     constructor(estado?:EstadoReactor) {
         if(estado){
@@ -28,7 +28,7 @@ export default class Reactor {
         this.estado = newEstado;
     }
 
-    public addObservador(observador: InteresadoEnCambioDeEstadoReactor) {
+    public addObservador(observador: ObvservadorEstadoReactor) {
         if(this.observadores.includes(observador)){
             console.log("Error: Observadores ya contienen el obervador pasado por parametro")
         }
@@ -37,7 +37,7 @@ export default class Reactor {
         }
     }
 
-    public removeObservador(observador: InteresadoEnCambioDeEstadoReactor){
+    public removeObservador(observador: ObvservadorEstadoReactor){
         if(this.observadores.includes(observador)){
             this.observadores = this.observadores.filter(x => x!= observador);
         }

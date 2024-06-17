@@ -1,8 +1,8 @@
 import Reactor from "../reactor";
 import EstadoReactor from "./EstadoReactor";
 import EstadoNormal from "./EstadoNormal";
-import Notificacion from "../../notificacion";
-import { InteresesEstadoReactor } from "../../Persona/persona";
+import Notificacion from "../../Notificacion/notificacion";
+import InteresesEstadoReactor from "../../types/interesesEstadoReactor";
 
 
 export default class EstadoApagado extends EstadoReactor {

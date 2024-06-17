@@ -1,19 +1,18 @@
-import Notificacion from "../notificacion";
-import InteresadoEnCambioDeEstadoReactor from "./InteresadoEnCambioDeEstadoReactor";
+import Persona from "./persona";
+import Notificable from "../Notificacion/notificable";
+import Notificacion from "../Notificacion/notificacion";
+import InteresesEstadoReactor from "../types/interesesEstadoReactor";
+import InteresadoEnCambioDeEstadoReactor from "./interesadoEnCambioDeEstadoReactor";
 
-export enum InteresesEstadoReactor{
-    Normal,
-    Criticidad,
-    Critico,
-    Apagado
-}
- 
-export class Persona implements InteresadoEnCambioDeEstadoReactor{
-
-    public interesesEstadoReactor: InteresesEstadoReactor[] = [];
-
-    private notificaciones: Notificacion[] = []
+export default class ObvservadorEstadoReactor extends Persona implements Notificable,InteresadoEnCambioDeEstadoReactor{
     
+    private notificaciones: Notificacion[] = []
+    public interesesEstadoReactor: InteresesEstadoReactor[] = [];
+    
+    constructor(nombre: string, apellido:string){
+        super(nombre,apellido)
+    }
+
     public getNotificaciones():Notificacion[] {
         return this.notificaciones;
     }
