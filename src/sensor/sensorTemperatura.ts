@@ -1,22 +1,44 @@
 import EmiteTemperatura from "../types/emiteTemperatura";
 
 export default class SensorTemperatura{
-    private emisorTemperatura: EmiteTemperatura;
+    private emisorTemperatura: null|EmiteTemperatura;
 
-    constructor(emisorTemperatura: EmiteTemperatura)
+    constructor(emisorTemperatura?: EmiteTemperatura)
     {
-        this.emisorTemperatura = emisorTemperatura;
+        if(emisorTemperatura){
+            this.emisorTemperatura = emisorTemperatura;
+        }
+        else{
+            this.emisorTemperatura = null;
+        }
     }
 
-    public getEmisorTemperatura():EmiteTemperatura{
-        return this.emisorTemperatura;
+    public getEmisorTemperatura():EmiteTemperatura|EmisorDeTemperaturaNoSeteado{
+        if(this.emisorTemperatura){
+            return this.emisorTemperatura;
+        }
+        else{
+            throw EmisorDeTemperaturaNoSeteado;
+        }
     }
 
     public setEmisorTemperatura(emisorTemperatura: EmiteTemperatura): void{
         this.emisorTemperatura = emisorTemperatura;
     }
 
-    public lecturaDeTemperatura():Number{
-        return this.emisorTemperatura.getTemperatura();
+    public lecturaDeTemperatura():Number|EmisorDeTemperaturaNoSeteado{
+        if(this.emisorTemperatura){
+            return this.emisorTemperatura.getTemperatura();
+        }
+        else{
+            throw new EmisorDeTemperaturaNoSeteado("No se encuentra seteado el emisor de temperatura en la clase "+this.toString());
+        }
+    }
+}
+
+export class EmisorDeTemperaturaNoSeteado extends Error{
+    constructor(message: string) {
+        super(message);
+        this.name = "Error_Lectura_EmisorDeTemperatura_No_Seteado";
     }
 }
