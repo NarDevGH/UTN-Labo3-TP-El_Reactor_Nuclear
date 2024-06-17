@@ -12,21 +12,37 @@ export default class Reactor implements EmiteTemperatura{
     private _temperatura: number;
     private _observadorOperario: Observador[] = [];
     private _observadorDirectivo: Observador[] = [];
-    private estado: Estado;
-    private _barrasDeControl: BarrasControl[] = [];
-    
+
+       // punto 3)v
+       private _observadorTemperatura: Observador;
+       public get observadorTemperatura(): Observador {
+           return this._observadorTemperatura;
+       }
+       public set observadorTemperatura(value: Observador) {
+           this._observadorTemperatura = value;
+       }
+   
+   
+       private _estado: Estado;
+       private _barrasDeControl: BarrasControl[] = [];
+   
+       // correcto?
+       private ContB: ContBarras;
+       private ContE: ContadorEstados;
+       
+       
     
     
     // Constructor
     constructor(temperatura: number, estado: Estado) {
         this._temperatura = temperatura;
-        this.estado = estado;
+        this._estado = estado;
     }
     
     // Modificar Temperatura
     public cambiarTemperatura(newTemperatura: number) {
         this._temperatura = newTemperatura;
-        this.estado.manejaCambioTemperatura(this);
+        this._estado.manejaCambioTemperatura(this,ContB,ContE); // correcto?
     }
     
     // Metodos añadir Observadores
@@ -38,27 +54,36 @@ export default class Reactor implements EmiteTemperatura{
         this._observadorDirectivo.push(observador);
     }
     
-    public setEstado(newEstado: Estado){
-        this.estado = newEstado;
-    }
-    
-    public getTemperatura(): number {
-        return this._temperatura;
-    }
-    public setTemperatura(value: number) {
-        this._temperatura = value;
-    }
-    
-    public getObservadorOperario(): Observador[] {
-        return this._observadorOperario;
-    }
-    
-    public getObservadorDirectivo(): Observador[] {
-        return this._observadorDirectivo;
-    }
-    
-    public getBarrasDeControl(): BarrasControl[] {
-        return this._barrasDeControl;
-    }
-    
+   // GETTERS Y SETTERS
+   public getTemperatura(): number {
+    return this._temperatura;
+}
+public setTemperatura(value: number) {
+    this._temperatura = value;
+}
+public getObservadorOperario(): Observador[] {
+    return this._observadorOperario;
+}
+public setObservadorOperario(value: Observador[]) {
+    this._observadorOperario = value;
+}
+public getObservadorDirectivo(): Observador[] {
+    return this._observadorDirectivo;
+}
+public setObservadorDirectivo(value: Observador[]) {
+    this._observadorDirectivo = value;
+}
+public getEstado(): Estado {
+    return this._estado;
+}
+public setEstado(value: Estado) {
+    this._estado = value;
+}
+public getBarrasDeControl(): BarrasControl[] {
+    return this._barrasDeControl;
+}
+public setBarrasDeControl(value: BarrasControl[]) {
+    this._barrasDeControl = value;
+}
+
 }
