@@ -1,3 +1,6 @@
+<p style="text-align: center; font-size: 50px;"><b>~ Parte 1 ~</b></p>
+</br>
+
 ## Introducción
 
 El Sr. Montgomery B. desea implementar un sistema que asista a los operadores de su planta nuclear, en particular a un tal
@@ -73,3 +76,37 @@ verificar:
 - El porcentaje de código cubierto por pruebas unitarias debe superar el 80%.
 - Agregar archivo README.md al proyecto describiendo el proyecto, agregar instrucciones para su compilación y
 funcionamiento.
+
+---
+
+</br>
+<p style="text-align: center; font-size: 50px;"><b>~ Parte 2 ~</b></p>
+
+El Sr. Montgomery B. está muy conforme con los resultados obtenidos hasta ahora, gracias al sistema implementado la planta
+sigue en pie a pesar de las distracciones de sus empleados.
+Para continuar con estos buenos resultados, y que el evitar una catástrofe no dependa pura y exclusivamente de Homero J. S.,
+el Sr. Montgomery B. les encarga mejorar el sistema de alertas implementado, de manera tal que, el mismo permita enviar
+mensajes de alerta a distintos operarios. Esta mejora al sistema de alertas debe permitir agregar y eliminar operarios, que
+serán alertados en caso de una emergencia, de manera dinámica.
+El Sr. Montgomery B. también desea ser notificado sólo cuando el reactor es apagado.
+¿Qué se pide?
+1. Diagrama de clase de la nueva solución propuesta.
+2. Conocer la cantidad de veces que el reactor estuvo en estado normal, crítico, y/o debió ser apagado. (No se debe
+depender de las notificaciones enviadas para resolver este punto).
+
+### Requerimientos adicionales:
+- Desarrollar las pruebas unitarias para cada método realizado.
+- El porcentaje de código cubierto por pruebas unitarias debe superar el 80%.
+- Agregar archivo README.md al proyecto describiendo el proyecto, agregar instrucciones para su compilación y
+funcionamiento.
+- Para conocer el estado del reactor no se podrá utilizar código del estilo:
+```java
+if (estado === "CRITICO") {
+...
+}
+// o
+if (estado === ESTADO.CRITICO) {
+...
+}
+// ni similares
+```
