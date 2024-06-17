@@ -15,7 +15,7 @@ export default class EstadoApagado extends EstadoReactor {
     public notificarObservadores(reactor: Reactor) {
         let observadoresInteresados = reactor.observadores.filter(x => x.estaInteresadoEnEstado(InteresesEstadoReactor.Apagado));
         for (const observador of observadoresInteresados) {
-            observador.recibirNotificacion(new Notificacion("El reactor paso a estado Criticidad"));
+            observador.recibirNotificacion(new Notificacion("El reactor paso a estado Apagado"));
         }
     }
 
