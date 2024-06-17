@@ -3,11 +3,12 @@ import { Estado } from "../estados/estado";
 import ObservadorOperario from "../observadores/observador-operario";
 import ObservadorDirectivo from "../observadores/observador-directivo";
 import { BarrasControl } from "../barras/barras_control";
+import EmiteTemperatura from "../types/emiteTemperatura";
 
 
 
 
-export default class Reactor {
+export default class Reactor implements EmiteTemperatura{
     private _temperatura: number;
     private _observadorOperario: Observador[] = [];
     private _observadorDirectivo: Observador[] = [];
