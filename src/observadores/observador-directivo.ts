@@ -1,9 +1,11 @@
+import { Alerta } from "../alerta/alerta";
 import { Observador } from "./observador";
 
 export default class ObservadorDirectivo implements Observador{
-    public update(temperature: number) {
+    public update(temperature: number, alert:Alerta): String {
         if (temperature === 0) {
-            console.log('Alerta al jefe: El reactor se ha apagado.');
+            alert.setMensaje("El reactor está apagado")
         }
+        return alert.getMensaje();
     }
 }

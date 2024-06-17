@@ -2,7 +2,9 @@ import { Observador } from "../observadores/observador";
 import { Estado } from "../estados/estado";
 import ObservadorOperario from "../observadores/observador-operario";
 import ObservadorDirectivo from "../observadores/observador-directivo";
-import { BarrasControl } from "../barras_control";
+import { BarrasControl } from "../barras/barras_control";
+
+
 
 
 export default class Reactor {
@@ -18,9 +20,6 @@ export default class Reactor {
     constructor(temperatura: number, estado: Estado) {
         this._temperatura = temperatura;
         this.estado = estado;
-        this._observadorOperario.push(new ObservadorOperario());
-        this._observadorDirectivo.push(new ObservadorDirectivo());
-        this._barrasDeControl.push(new BarrasControl());
     }
     
     // Modificar Temperatura

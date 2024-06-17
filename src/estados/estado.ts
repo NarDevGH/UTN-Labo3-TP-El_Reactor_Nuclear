@@ -1,8 +1,11 @@
+import { ContBarras } from "../contadores/contador_barras";
 import Reactor from "../reactor/reactor";
-import { ResultadoEnergia } from "../types/constants";
+import { ContadorEstados } from "../contadores/contadores_estados";
+import { ResultadoEnergia } from "../types/resultado_energia";
 
 export abstract class Estado {
 
+    // calculo de energia Original
     calcularEnergia(temperatura: number): ResultadoEnergia {
         // Calculamos la pendiente (m) y el intercepto (b) para la energía termal
         const mTermal = (2500.02 - 2100.0) / (329.98 - 280.00);
@@ -15,15 +18,20 @@ export abstract class Estado {
         // Usamos las ecuaciones lineales para calcular la energía termal y neta
         const energiaTermal = mTermal * temperatura + bTermal;
         const energiaNeta = mNeta * temperatura + bNeta;
-    
+
         return { termal: energiaTermal , neta: energiaNeta  };
     }
 
+    // modificacion: tiempo (horas), porcentaje (%)
     generarEnergia(temperatura: number): ResultadoEnergia {
         const resultado = this.calcularEnergia (temperatura);
         return resultado;
     }
-    
 
-    abstract manejaCambioTemperatura(reactor: Reactor): void;
+
+    // metodo por separado para calcular con horas?
+    
+    abstract manejaCambioTemperatura(reactor: Reactor, ContB: ContBarras,contE: ContadorEstados ): number;
+
+    abstract notificar(reactor:Reactor): void;
 }
