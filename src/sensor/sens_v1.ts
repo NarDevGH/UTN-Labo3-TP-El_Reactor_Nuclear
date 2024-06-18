@@ -1,7 +1,6 @@
 import { Alerta } from "../alerta/alerta";
-import { Observador } from "./observador";
 
-export default class ObservadorTemperatura implements Observador{
+export default class Sensor {
     public update(temperature: number): Alerta {
         const alerta = new Alerta();
             alerta.setTemp(temperature);

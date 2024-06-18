@@ -4,6 +4,7 @@ import ObservadorOperario from "../observadores/observador-operario";
 import ObservadorDirectivo from "../observadores/observador-directivo";
 import { BarrasControl } from "../barras/barras_control";
 import EmiteTemperatura from "../types/emiteTemperatura";
+import Sensor from "../sensor/sens_v1";
 
 
 
@@ -14,13 +15,13 @@ export default class Reactor implements EmiteTemperatura{
     private _observadorDirectivo: Observador[] = [];
 
        // punto 3)v
-       private _observadorTemperatura: Observador;
-       public get observadorTemperatura(): Observador {
-           return this._observadorTemperatura;
-       }
-       public set observadorTemperatura(value: Observador) {
-           this._observadorTemperatura = value;
-       }
+      private _sensor: Sensor;
+    public getSensor(): Sensor {
+        return this._sensor;
+    }
+    public setSensor(value: Sensor) {
+        this._sensor = value;
+    }
    
    
        private _estado: Estado;
@@ -34,9 +35,10 @@ export default class Reactor implements EmiteTemperatura{
     
     
     // Constructor
-    constructor(temperatura: number, estado: Estado) {
+    constructor(temperatura: number, estado: Estado,sensor: Sensor) {
         this._temperatura = temperatura;
         this._estado = estado;
+        this._sensor = sensor;
     }
     
     // Modificar Temperatura
