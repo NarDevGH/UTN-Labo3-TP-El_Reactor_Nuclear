@@ -1,7 +1,6 @@
-<p style="text-align: center; font-size: 50px;"><b>~ Parte 1 ~</b></p>
-</br>
+# ~ Parte 1 ~
 
-## Introducción
+### Introducción
 
 El Sr. Montgomery B. desea implementar un sistema que asista a los operadores de su planta nuclear, en particular a un tal
 Homero J. S., en su operatoria diaria.
@@ -24,7 +23,7 @@ detenerla. Existe un tercer mecanismo de control, aún no implementado, que cons
 turbinas se encargan de impulsar el material refrigerante (agua) a través del reactor para de esa forma disminuir el calor
 generado en el interior del mismo.
 
-## Funcionamiento del reactor
+### Funcionamiento del reactor
 
 El reactor del Sr. Montgomery B., posee una capacidad de 700 MW/h, lo que significa que en condiciones normales, puede
 generar hasta 700 MWe de energía eléctrica por hora, aunque por lo general, la cantidad por hora producida es menor.
@@ -58,7 +57,7 @@ prc = (tiempo_vida_util / 3600) * 100
 donde tiempo_vida_util es un valor que varía entre 0 y 200.
 Otro de los requerimientos es que el mecanismo de enfriamiento no pueda ser activado si el reactor funciona con normalidad.
 
-## ¿Qué se pide?
+### ¿Qué se pide?
 
 1. Diagrama de clase de la solución propuesta.
 2. Diagramas de sequencia de 2 o más requerimientos a definir por el equipo.
@@ -71,16 +70,18 @@ verificar:
     5. Conocer la temperatura del reactor en todo momento.
     6. Conocer la cantidad de energia neta (MWe) producida en todo momento.
 
-### Requerimientos adicionales:
+#### Requerimientos adicionales:
 - Desarrollar las pruebas unitarias para cada método realizado.
 - El porcentaje de código cubierto por pruebas unitarias debe superar el 80%.
 - Agregar archivo README.md al proyecto describiendo el proyecto, agregar instrucciones para su compilación y
 funcionamiento.
 
----
 
 </br>
-<p style="text-align: center; font-size: 50px;"><b>~ Parte 2 ~</b></p>
+
+---
+
+# ~ Parte 2 ~
 
 El Sr. Montgomery B. está muy conforme con los resultados obtenidos hasta ahora, gracias al sistema implementado la planta
 sigue en pie a pesar de las distracciones de sus empleados.
