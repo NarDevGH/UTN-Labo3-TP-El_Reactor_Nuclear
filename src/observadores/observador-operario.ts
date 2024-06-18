@@ -2,11 +2,13 @@ import { Alerta } from "../alerta/alerta";
 import { Observador } from "./observador";
 
 export default class ObservadorOperario implements Observador{
-    public update(temperature: number,alert: Alerta): String {
+    public update(temperature: number): Alerta {
+        const alerta = new Alerta();
         if (temperature > 330) {
-            alert.setMensaje("Activar protocolos de enfriamiento del reactor")
+            alerta.setTemp(temperature);
+            alerta.setMensaje("Activar protocolos de enfriamiento del reactor");
         }
-        return alert.getMensaje();
+        return alerta;
     }
   
 }
