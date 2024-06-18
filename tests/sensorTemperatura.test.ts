@@ -17,7 +17,7 @@ describe("Tests Sensor de Temperatura",()=>{
         expect(sensorTemperatura.getEmisorTemperatura()).toBe(reactor);
     })
 
-    describe("Throw EmisorDeTemperaturaNoSeteado si el emisor de temperatura no esta seteado.",()=>{
+    describe("Throw EmisorDeTemperaturaNoSeteado al obtener el emisor de temperatura sin estar seteado.",()=>{
         let sensorTemperatura = new SensorTemperatura();
         
         expect(sensorTemperatura.getEmisorTemperatura()).toThrow(EmisorDeTemperaturaNoSeteado);
@@ -40,5 +40,11 @@ describe("Tests Sensor de Temperatura",()=>{
         let sensorTemperatura = new SensorTemperatura(reactor);
         
         expect(sensorTemperatura.lecturaDeTemperatura()).toBe(temperaturaDelReactor);
+    })
+
+    describe("Throw EmisorDeTemperaturaNoSeteado al leer emisor de temperatura sin estar seteado.",()=>{
+        let sensorTemperatura = new SensorTemperatura();
+        
+        expect(sensorTemperatura.lecturaDeTemperatura()).toThrow(EmisorDeTemperaturaNoSeteado);
     })
 })
