@@ -1,5 +1,5 @@
 import { Alerta } from "../alerta/alerta";
 
 export interface Observador {
-    update(temperature: number): Alerta;
+    update(alert: Alerta): void;
 }
