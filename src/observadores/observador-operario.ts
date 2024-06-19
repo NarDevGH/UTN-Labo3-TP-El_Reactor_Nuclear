@@ -8,7 +8,7 @@ export default class ObservadorOperario implements Observador{
             alerta.setTemp(temperature);
             alerta.setMensaje("Activar protocolos de enfriamiento del reactor");
         }
-        return alerta;
+       
     }
   
 }

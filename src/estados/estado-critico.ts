@@ -1,23 +1,23 @@
-import { ContBarras } from "../contadores/contador_barras";
-import { ContadorEstados } from "../contadores/contadores_estados";
+import { Alerta } from "../alerta/alerta";
 import Reactor from "../reactor/reactor";
 import { ResultadoEnergia } from "../types/resultado_energia";
 import { Estado } from "./estado";
+import EstadoNormal from "./estado-normal";
 
 export default class EstadoCritico extends Estado{
-    public manejaCambioTemperatura(reactor: Reactor, contB: ContBarras,contE: ContadorEstados): number {
-        contB.setContador(0);
+    public manejaCambioTemperatura(reactor: Reactor): number {
+        reactor.setContadorBarras(0)
         let NuevaTemp: number = 0;
         reactor.getBarrasDeControl().forEach(valor => {
-            while (NuevaTemp > 330 && reactor.getBarrasDeControl.length > 0) {
+            while (NuevaTemp > 330) {  // LE AGREGAMOS CONDICIONAL
             NuevaTemp = reactor.getTemperatura() - (valor.getTiempoVida()/3600)*100;
-            contB.setContador(contB.getContador() + 1)
+            reactor.setContadorBarras(reactor.getContadorBarras()+1)
             }
         });
         reactor.setTemperatura(NuevaTemp)
-        contE.setNormal(contE.getNormal()+1)
-
-        return contB.getContador();
+        reactor.setContadorEstNormal(reactor.getContadorEstNormal()+1)
+        reactor.setEstado(new EstadoNormal()); 
+        return reactor.getContadorBarras()
     }
 
     generarEnergia(temperatura: number): ResultadoEnergia {
@@ -27,9 +27,11 @@ export default class EstadoCritico extends Estado{
         return resultado;
     }
 
-    public notificar(reactor: Reactor) {
+    public notificar(reactor: Reactor): Alerta {
         for (const observador of reactor.getObservadorDirectivo()) {
             observador.update(reactor.getTemperatura());
+
+            // IMPLEMENTAR LÓGICA PARA CREAR ALERTA DE SUS OBSERVADORES DIRECTIVOS
         }
     }
 }

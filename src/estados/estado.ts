@@ -1,6 +1,4 @@
-import { ContBarras } from "../contadores/contador_barras";
 import Reactor from "../reactor/reactor";
-import { ContadorEstados } from "../contadores/contadores_estados";
 import { ResultadoEnergia } from "../types/resultado_energia";
 
 export abstract class Estado {
@@ -31,7 +29,7 @@ export abstract class Estado {
 
     // metodo por separado para calcular con horas?
     
-    abstract manejaCambioTemperatura(reactor: Reactor, ContB: ContBarras,contE: ContadorEstados ): number;
+    abstract manejaCambioTemperatura(reactor: Reactor): number;
 
     abstract notificar(reactor:Reactor): void;
 }
