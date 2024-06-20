@@ -17,6 +17,7 @@ export default class EstadoCritico extends Estado{
         reactor.setTemperatura(NuevaTemp)
         reactor.setContadorEstNormal(reactor.getContadorEstNormal()+1)
         reactor.setEstado(new EstadoNormal()); 
+        this.notificarDirectivos(reactor);
         return reactor.getContadorBarras()
     }
 
@@ -27,11 +28,12 @@ export default class EstadoCritico extends Estado{
         return resultado;
     }
 
-    public notificar(reactor: Reactor): Alerta {
+    public notificarDirectivos(reactor: Reactor): void{
         for (const observador of reactor.getObservadorDirectivo()) {
-            observador.update(reactor.getTemperatura());
-
-            // IMPLEMENTAR LÓGICA PARA CREAR ALERTA DE SUS OBSERVADORES DIRECTIVOS
+            let alerta = new Alerta();
+            alerta.setMensaje("El Reactor paso a estado apagado")
+            alerta.setTemp(reactor.getTemperatura())
+            observador.recibirAlerta(alerta);
         }
     }
 }

@@ -1,15 +1,15 @@
-import { Observador } from "../observadores/observador";
 import { Estado } from "../estados/estado";
 import { BarrasControl } from "../barras/barras_control";
 import EmiteTemperatura from "../types/emiteTemperatura";
+import { IObservadorEstadoReactor } from "../observadores/IObservadorEstadoReactor";
 
 
 
 
 export default class Reactor implements EmiteTemperatura {
     private _temperatura: number;
-    private _observadorOperario: Observador[] = [];
-    private _observadorDirectivo: Observador[] = [];
+    private _observadorOperario: IObservadorEstadoReactor[] = [];
+    private _observadorDirectivo: IObservadorEstadoReactor[] = [];
     private _contadorEstNormal: number;
     private _contadorEstCriticidad: number;
     private _contadorEstCritico: number;
@@ -54,13 +54,19 @@ export default class Reactor implements EmiteTemperatura {
         this._estado.manejaCambioTemperatura(this);
     }
 
-    // Metodos añadir Observadores
-    public addObservadorOperario(observador: Observador) {
+    // Metodos añadir IObservadorEstadoReactores
+    public addObservadorOperario(observador: IObservadorEstadoReactor) {
         this._observadorOperario.push(observador);
     }
-
-    public addObservadorDirectivo(observador: Observador) {
+    public removeObservadorOperario(observador: IObservadorEstadoReactor){
+        this._observadorOperario = this._observadorOperario.filter(x => x != observador)
+    }
+    
+    public addObservadorDirectivo(observador:IObservadorEstadoReactor) {
         this._observadorDirectivo.push(observador);
+    }
+    public removeObservadorDirectivo(observador: IObservadorEstadoReactor){
+        this._observadorDirectivo = this._observadorDirectivo.filter(x => x != observador)
     }
 
     // GETTERS Y SETTERS
@@ -70,17 +76,11 @@ export default class Reactor implements EmiteTemperatura {
     public setTemperatura(value: number) {
         this._temperatura = value;
     }
-    public getObservadorOperario(): Observador[] {
+    public getObservadorOperario():IObservadorEstadoReactor[] {
         return this._observadorOperario;
     }
-    public setObservadorOperario(value: Observador[]) {
-        this._observadorOperario = value;
-    }
-    public getObservadorDirectivo(): Observador[] {
+    public getObservadorDirectivo():IObservadorEstadoReactor[] {
         return this._observadorDirectivo;
-    }
-    public setObservadorDirectivo(value: Observador[]) {
-        this._observadorDirectivo = value;
     }
     public getEstado(): Estado {
         return this._estado;
@@ -118,6 +118,4 @@ export default class Reactor implements EmiteTemperatura {
     public setContadorBarras(value: number) {
         this._contadorBarras = value;
     }
-
-
 }

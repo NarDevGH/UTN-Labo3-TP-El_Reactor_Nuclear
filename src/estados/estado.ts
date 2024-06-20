@@ -30,6 +30,4 @@ export abstract class Estado {
     // metodo por separado para calcular con horas?
     
     abstract manejaCambioTemperatura(reactor: Reactor): number;
-
-    abstract notificar(reactor:Reactor): void;
 }

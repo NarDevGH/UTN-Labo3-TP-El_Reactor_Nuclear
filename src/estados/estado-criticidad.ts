@@ -33,16 +33,5 @@ export default class EstadoCriticidad extends Estado{
         resultado.neta = resultado.neta*0.2;
         return resultado;
     }
-
-    public notificar(reactor: Reactor): Alerta {
-        for (const observador of reactor.getObservadorOperario()) {
-            observador.update(reactor.getTemperatura());
-
-            // IMPLEMENTAR LÓGICA PARA CREAR ALERTA DE SUS OBSERVADORES OPERARIOS
-
-
-        }
-    }
-
 }
 
