@@ -5,14 +5,14 @@ import { Alerta } from "../src/alerta/alerta";
 import { Estado } from "../src/estados/estado";
 
 describe("Tests ObservadorEstadoReactor",()=>{
-    let temperaturaDelReactor: Number;
+    let temperaturaDelReactor: number;
     let estado: Estado;
     let reactor: Reactor;
 
     beforeEach(()=>{
         temperaturaDelReactor = 100;
         estado = new EstadoNormal();
-        reactor = new Reactor(temperaturaDelReactor,estado);
+        reactor = new Reactor(temperaturaDelReactor,0,0,0,0,estado);
     })
 
     describe("RecibirAlerta()",()=>{

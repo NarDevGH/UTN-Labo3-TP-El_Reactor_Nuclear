@@ -1,7 +1,7 @@
 export class Alerta{
     private _mensaje: String;
     private _temp: number;
-    
+
     public getMensaje(): String {
         return this._mensaje;
     }
