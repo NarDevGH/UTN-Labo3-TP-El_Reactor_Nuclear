@@ -43,6 +43,10 @@ export default class Reactor implements EmiteTemperatura {
     public generarEnergia(): ResultadoEnergia{
         return this._estado.generarEnergia(this.getTemperatura());
     }
+    
+    public energiaGeneradaEnXHoras(horas: number){
+        return this._estado.energiaGeneradaEnXHoras(this,horas);
+    }
 
     // METODO ENFRIAR
     public enfriar() {
