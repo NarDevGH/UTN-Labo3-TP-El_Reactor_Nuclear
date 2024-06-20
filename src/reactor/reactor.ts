@@ -2,6 +2,7 @@ import { Estado } from "../estados/estado";
 import { BarrasControl } from "../barras/barras_control";
 import EmiteTemperatura from "../types/emiteTemperatura";
 import { IObservadorEstadoReactor } from "../observadores/IObservadorEstadoReactor";
+import { ResultadoEnergia } from "../types/resultado_energia";
 
 
 
@@ -39,8 +40,8 @@ export default class Reactor implements EmiteTemperatura {
 
 
     // GENERAR ENERGIA
-    public generarEnergia() {
-        this._estado.generarEnergia(this.getTemperatura());
+    public generarEnergia(): ResultadoEnergia{
+        return this._estado.generarEnergia(this.getTemperatura());
     }
 
     // METODO ENFRIAR
