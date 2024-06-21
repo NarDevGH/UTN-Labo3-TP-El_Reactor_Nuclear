@@ -10,7 +10,6 @@ export default class EstadoNormal extends Estado{
         if (reactor.getTemperatura() > 330) {
             reactor.setEstado(new EstadoCriticidad());
             reactor.setContadorEstCriticidad(reactor.getContadorEstCriticidad()+1)
-            this.notificarOperarios(reactor)
         } else if (reactor.getTemperatura()>400) {
             reactor.setEstado(new EstadoCritico());
             reactor.setContadorEstCritico(reactor.getContadorEstCritico()+1)
@@ -19,12 +18,5 @@ export default class EstadoNormal extends Estado{
         
         reactor.setContadorBarras(0);
         return reactor.getContadorBarras();
-    }
-
-    public notificarOperarios(reactor: Reactor): void{
-        for (const observador of reactor.getObservadorOperario()) {
-            let alerta = new Alerta("El Reactor paso a estado criticidad",reactor.getTemperatura());
-            observador.recibirAlerta(alerta);
-        }
     }
 }

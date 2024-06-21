@@ -3,10 +3,13 @@ import Reactor from "../reactor/reactor";
 import { ResultadoEnergia } from "../types/resultado_energia";
 import { Estado } from "./estado";
 import EstadoCritico from "./estado-critico";
+import EstadoNormal from "./estado-normal";
 
 export default class EstadoCriticidad extends Estado {
 
     manejaCambioTemperatura(reactor: Reactor): number {
+        this.notificarOperarios(reactor)
+
         reactor.setContadorBarras(0)
         let NuevaTemp: number = 0;
         if (reactor.getTemperatura() > 400) {
@@ -21,6 +24,7 @@ export default class EstadoCriticidad extends Estado {
                     reactor.setContadorBarras(reactor.getContadorBarras() + 1)
                 }
             });
+            reactor.setEstado(new EstadoNormal())
             reactor.setTemperatura(NuevaTemp)
             reactor.setContadorEstNormal(reactor.getContadorEstNormal() + 1)
         }
@@ -32,6 +36,15 @@ export default class EstadoCriticidad extends Estado {
         resultado.termal = resultado.termal * 0.2;
         resultado.neta = resultado.neta * 0.2;
         return resultado;
+    }
+
+    public notificarOperarios(reactor: Reactor): void{
+        for (const observador of reactor.getObservadorOperario()) {
+            let alerta = new Alerta();
+            alerta.setMensaje("El Reactor paso a estado criticidad")
+            alerta.setTemp(reactor.getTemperatura())
+            observador.recibirAlerta(alerta);
+        }
     }
 }
 

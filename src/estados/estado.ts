@@ -29,11 +29,13 @@ export abstract class Estado {
 
     public energiaGeneradaEnXHoras(reactor: Reactor, horas: number): number
     {
-        const cambioDeEnergia = 8.33;
+        const cambioDeTemperatura = 8.33;
         let energiaGenerada = reactor.generarEnergia().neta;
     
+
         for (let hora = 0; hora < horas; hora++) {
             reactor.setTemperatura(reactor.getTemperatura()+cambioDeEnergia)
+
             energiaGenerada += reactor.generarEnergia().neta;
         }
     
