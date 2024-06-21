@@ -80,6 +80,7 @@ export default class Reactor implements EmiteTemperatura {
     }
     public setTemperatura(value: number) {
         this._temperatura = value;
+        this._estado.manejaCambioTemperatura(this);
     }
     public getObservadorOperario():IObservadorEstadoReactor[] {
         return this._observadorOperario;
