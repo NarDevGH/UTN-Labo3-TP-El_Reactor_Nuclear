@@ -27,7 +27,7 @@ export default class EstadoCriticidad extends Estado {
         return reactor.getContadorBarras()
     }
 
-    public generarEnergia(temperatura: number): ResultadoEnergia {
+    override generarEnergia(temperatura: number): ResultadoEnergia {
         const resultado = this.calcularEnergia(temperatura);
         resultado.termal = resultado.termal * 0.2;
         resultado.neta = resultado.neta * 0.2;

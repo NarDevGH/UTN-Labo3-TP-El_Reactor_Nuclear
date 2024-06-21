@@ -23,9 +23,7 @@ export default class EstadoNormal extends Estado{
 
     public notificarOperarios(reactor: Reactor): void{
         for (const observador of reactor.getObservadorOperario()) {
-            let alerta = new Alerta();
-            alerta.setMensaje("El Reactor paso a estado criticidad")
-            alerta.setTemp(reactor.getTemperatura())
+            let alerta = new Alerta("El Reactor paso a estado criticidad",reactor.getTemperatura());
             observador.recibirAlerta(alerta);
         }
     }
