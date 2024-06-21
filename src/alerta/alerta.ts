@@ -2,6 +2,11 @@ export class Alerta{
     private _mensaje: String;
     private _temp: number;
 
+    constructor(mensaje: String, temperatura: number){
+        this._mensaje = mensaje;
+        this._temp = temperatura;
+    }
+
     public getMensaje(): String {
         return this._mensaje;
     }
