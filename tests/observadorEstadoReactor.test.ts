@@ -22,7 +22,7 @@ describe("Tests ObservadorEstadoReactor",()=>{
         reactor = new Reactor(temperaturaDelReactor,0,0,0,0,estado);
         reactor.addObservadorOperario(homero);
 
-        reactor.setTemperatura(350);
+        reactor.cambiarTemperatura(350);
 
         expect(homero.getAlertas().length).toBe(1);
     })
@@ -45,9 +45,9 @@ describe("Tests ObservadorEstadoReactor",()=>{
         let homero = new ObservadorEstadoReactor();
         reactor.addObservadorOperario(homero);
 
-        reactor.setTemperatura(350);
-        reactor.setTemperatura(350);
-        reactor.setTemperatura(350);
+        reactor.cambiarTemperatura(350);
+        reactor.cambiarTemperatura(350);
+        reactor.cambiarTemperatura(350);
 
         expect(homero.getAlertas()).toStrictEqual(alertas);
     })
