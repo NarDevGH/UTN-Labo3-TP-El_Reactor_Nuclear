@@ -15,7 +15,7 @@ describe("Tests ObservadorEstadoReactor",()=>{
         reactor = new Reactor(temperaturaDelReactor,0,0,0,0,estado);
     })
     
-    describe("RecibirAlerta()",()=>{
+    test("RecibirAlerta()",()=>{
         
         let homero = new ObservadorEstadoReactor();
         estado = new EstadoNormal();
@@ -27,18 +27,18 @@ describe("Tests ObservadorEstadoReactor",()=>{
         expect(homero.getAlertas().length).toBe(1);
     })
 
-    describe("getAlertas()",()=>{
+    test("getAlertas()",()=>{
         let alerta1 = new Alerta();
         alerta1.setMensaje("El Reactor paso a estado criticidad")
-        alerta1.setTemp(reactor.getTemperatura())
+        alerta1.setTemp(350)
 
         let alerta2 = new Alerta();
         alerta2.setMensaje("El Reactor paso a estado criticidad")
-        alerta2.setTemp(reactor.getTemperatura())
+        alerta2.setTemp(350)
 
         let alerta3 = new Alerta();
         alerta3.setMensaje("El Reactor paso a estado criticidad")
-        alerta3.setTemp(reactor.getTemperatura())
+        alerta3.setTemp(350)
 
         let alertas:Alerta[] = [alerta1,alerta2,alerta3]
 
@@ -49,6 +49,6 @@ describe("Tests ObservadorEstadoReactor",()=>{
         reactor.setTemperatura(350);
         reactor.setTemperatura(350);
 
-        expect(homero.getAlertas()).toBe(alertas);
+        expect(homero.getAlertas()).toStrictEqual(alertas);
     })
 })
