@@ -18,7 +18,7 @@ export default class SensorTemperatura{
             return this.emisorTemperatura;
         }
         else{
-            throw EmisorDeTemperaturaNoSeteado;
+            throw new EmisorDeTemperaturaNoSeteado();
         }
     }
 
@@ -31,14 +31,14 @@ export default class SensorTemperatura{
             return this.emisorTemperatura.getTemperatura();
         }
         else{
-            throw new EmisorDeTemperaturaNoSeteado("No se encuentra seteado el emisor de temperatura en la clase "+this.toString());
+            throw new EmisorDeTemperaturaNoSeteado();
         }
     }
 }
 
 export class EmisorDeTemperaturaNoSeteado extends Error{
-    constructor(message: string) {
-        super(message);
+    constructor() {
+        super("No se encuentra seteado el emisor de temperatura en la clase");
         this.name = "Error_Lectura_EmisorDeTemperatura_No_Seteado";
     }
 }
