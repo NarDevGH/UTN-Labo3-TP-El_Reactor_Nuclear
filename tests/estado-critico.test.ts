@@ -28,13 +28,13 @@ describe('EstadoCritico', () => {
   });
 
   it('test notificarDirectivos()', () => {
-    let operario = new ObservadorEstadoReactor();
-    reactor.addObservadorDirectivo(operario);
+    let directivo = new ObservadorEstadoReactor();
+    reactor.addObservadorDirectivo(directivo);
 
     let newEstadoCritico = new EstadoCritico();
     reactor.setEstado(newEstadoCritico);
     newEstadoCritico.manejaCambioTemperatura(reactor);
 
-    expect(operario.getAlertas().length).toBe(1)
-});
+    expect(directivo.getAlertas().length).toBe(1)
+  })
 });
