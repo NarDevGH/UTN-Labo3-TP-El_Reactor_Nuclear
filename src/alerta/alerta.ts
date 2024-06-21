@@ -1,7 +1,8 @@
 export class Alerta{
-    private _mensaje: String;
-    private _temp: number;
+    private _mensaje:String = "" ;
+    private _temp:number = 0;
 
+    
     public getMensaje(): String {
         return this._mensaje;
     }
