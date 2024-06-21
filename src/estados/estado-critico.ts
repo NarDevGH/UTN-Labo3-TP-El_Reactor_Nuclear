@@ -30,9 +30,7 @@ export default class EstadoCritico extends Estado {
 
     public notificarDirectivos(reactor: Reactor): void{
         for (const observador of reactor.getObservadorDirectivo()) {
-            let alerta = new Alerta();
-            alerta.setMensaje("Activar protocolos de enfriamiento del reactor")
-            alerta.setTemp(reactor.getTemperatura())
+            let alerta = new Alerta("Activar protocolos de enfriamiento del reactor",reactor.getTemperatura());
             observador.recibirAlerta(alerta);
         }
 

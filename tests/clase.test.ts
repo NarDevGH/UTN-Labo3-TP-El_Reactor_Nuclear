@@ -33,4 +33,5 @@ describe('Reactor', () => {
     reactor = new Reactor();
     reactor.addObservadorOperario(operarioMock);
     reactor.addObservadorDirectivo(directivoMock);
-  });
+  })
+});
