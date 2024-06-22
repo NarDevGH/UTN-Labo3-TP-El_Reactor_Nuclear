@@ -3,17 +3,17 @@ import { IObservadorEstadoReactor } from "./IObservadorEstadoReactor";
 
 
 export default class ObservadorEstadoReactor implements IObservadorEstadoReactor{
-    private alertasRecividas: Alerta[];
+    private alertasRecibidas: Alerta[];
 
     constructor(){
-        this.alertasRecividas = [];
+        this.alertasRecibidas = [];
     }
 
     public recibirAlerta(alerta: Alerta): void {
-        this.alertasRecividas.push(alerta)
+        this.alertasRecibidas.push(alerta)
     }
 
     public getAlertas(): Alerta[]{
-        return this.alertasRecividas;
+        return this.alertasRecibidas;
     }
 }
