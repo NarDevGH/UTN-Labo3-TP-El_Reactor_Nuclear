@@ -41,7 +41,7 @@ export default class EstadoCriticidad extends Estado {
     public notificarOperarios(reactor: Reactor): void{
         for (const observador of reactor.getObservadorOperario()) {
             let alerta = new Alerta();
-            alerta.setMensaje("El Reactor paso a estado criticidad")
+            alerta.setMensaje("El Reactor paso a estado criticidad, iniciar protocolos de enfriamiento")
             alerta.setTemp(reactor.getTemperatura())
             observador.recibirAlerta(alerta);
         }
