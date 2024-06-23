@@ -31,11 +31,11 @@ export default class EstadoCriticidad extends Estado {
         return reactor.getContadorBarras()
     }
 
-    public generarEnergia(temperatura: number): ResultadoEnergia {
-        const resultado = this.calcularEnergia(temperatura);
-        resultado.termal = resultado.termal * 0.2;
-        resultado.neta = resultado.neta * 0.2;
-        return resultado;
+    public eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    {
+        energia.termal = energia.termal * 0.2;
+        energia.neta = energia.neta * 0.2;
+        return  energia;
     }
 
     public notificarOperarios(reactor: Reactor): void{

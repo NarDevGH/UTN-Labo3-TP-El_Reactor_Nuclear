@@ -21,11 +21,11 @@ export default class EstadoCritico extends Estado {
         return reactor.getContadorBarras()
     }
 
-    generarEnergia(temperatura: number): ResultadoEnergia {
-        const resultado = this.calcularEnergia(temperatura);
-        resultado.termal = resultado.termal * 0;
-        resultado.neta = resultado.neta * 0;
-        return resultado;
+    public eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    {
+        energia.termal = energia.termal * 0;
+        energia.neta = energia.neta * 0;
+        return  energia;
     }
 
     public notificarDirectivos(reactor: Reactor): void{
