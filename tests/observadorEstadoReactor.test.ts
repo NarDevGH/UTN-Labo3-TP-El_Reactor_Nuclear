@@ -18,8 +18,6 @@ describe("Tests ObservadorEstadoReactor",()=>{
     test("RecibirAlerta()",()=>{
         
         let homero = new ObservadorEstadoReactor();
-        estado = new EstadoNormal();
-        reactor = new Reactor(temperaturaDelReactor,0,0,0,0,estado);
         reactor.addObservadorOperario(homero);
 
         reactor.cambiarTemperatura(350);

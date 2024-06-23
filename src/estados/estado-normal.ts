@@ -9,10 +9,14 @@ export default class EstadoNormal extends Estado{
 
     public manejaCambioTemperatura(reactor: Reactor): number {
         if (reactor.getTemperatura() > 330) {
-            reactor.setEstado(new EstadoCriticidad());
+            const newEstado = new EstadoCriticidad();
+            reactor.setEstado(newEstado);
+            newEstado.manejaCambioTemperatura(reactor);
             reactor.setContadorEstCriticidad(reactor.getContadorEstCriticidad()+1)
         } else if (reactor.getTemperatura()>400) {
-            reactor.setEstado(new EstadoCritico());
+            const newEstado = new EstadoCritico();
+            reactor.setEstado(newEstado);
+            newEstado.manejaCambioTemperatura(reactor);
             reactor.setContadorEstCritico(reactor.getContadorEstCritico()+1)
 
         } 
