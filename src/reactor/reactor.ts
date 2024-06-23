@@ -16,7 +16,7 @@ export default class Reactor implements EmiteTemperatura {
     private _contadorEstCritico: number;
     private _contadorBarras: number;
     private _estado: Estado;
-    private _barrasDeControl: BarrasControl[] = [];
+    private _barrasDeControl: BarrasControl[] = [new BarrasControl(10)];
 
 
 

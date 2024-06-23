@@ -9,10 +9,16 @@ export default class EstadoCritico extends Estado {
         reactor.setContadorBarras(0)
         let NuevaTemp: number = 0;
         reactor.getBarrasDeControl().forEach(valor => {
-            while (NuevaTemp > 330) {  // LE AGREGAMOS CONDICIONAL
-                NuevaTemp = reactor.getTemperatura() - (valor.getTiempoVida() / 3600) * 100;
-                reactor.setContadorBarras(reactor.getContadorBarras() + 1)
+            while(valor.porcentajeReduccionEnergia() > 0){
+                // Reducir temperatura del reactor segun el porcentaje de enfriamento de la barra
+                NuevaTemp = reactor.getTemperatura() - (reactor.getTemperatura() * valor.porcentajeReduccionEnergia());
+                if (NuevaTemp < 330) {
+                    //Si la temperatura paso a al rango normal, dejar de usar las barras para reducir la temperatura
+                    break;
+                }
             }
+            //Por cada barra usada, aumentar el contador
+            reactor.setContadorBarras(reactor.getContadorBarras() + 1)
         });
         reactor.setTemperatura(NuevaTemp)
         reactor.setContadorEstNormal(reactor.getContadorEstNormal() + 1)
