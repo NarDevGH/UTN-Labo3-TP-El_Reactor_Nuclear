@@ -35,7 +35,7 @@ export abstract class Estado {
         let energiaGenerada = reactor.generarEnergia().neta;
     
         for (let hora = 0; hora < horas; hora++) {
-            reactor.setTemperatura(reactor.getTemperatura()+cambioDeTemperatura)
+            reactor.cambiarTemperatura(reactor.getTemperatura()+cambioDeTemperatura)
             energiaGenerada += reactor.generarEnergia().neta;
         }
     
