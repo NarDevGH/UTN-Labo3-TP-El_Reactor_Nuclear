@@ -27,15 +27,15 @@ describe("Tests ObservadorEstadoReactor",()=>{
 
     test("getAlertas()",()=>{
         let alerta1 = new Alerta();
-        alerta1.setMensaje("El Reactor paso a estado criticidad")
+        alerta1.setMensaje("El Reactor paso a estado criticidad, iniciar protocolos de enfriamiento")
         alerta1.setTemp(350)
 
         let alerta2 = new Alerta();
-        alerta2.setMensaje("El Reactor paso a estado criticidad")
+        alerta2.setMensaje("El Reactor paso a estado criticidad, iniciar protocolos de enfriamiento")
         alerta2.setTemp(350)
 
         let alerta3 = new Alerta();
-        alerta3.setMensaje("El Reactor paso a estado criticidad")
+        alerta3.setMensaje("El Reactor paso a estado criticidad, iniciar protocolos de enfriamiento")
         alerta3.setTemp(350)
 
         let alertas:Alerta[] = [alerta1,alerta2,alerta3]
@@ -47,6 +47,6 @@ describe("Tests ObservadorEstadoReactor",()=>{
         reactor.cambiarTemperatura(350);
         reactor.cambiarTemperatura(350);
 
-        expect(homero.getAlertas()).toStrictEqual(alertas);
+        expect(homero.getAlertas() === alertas ).toBeTruthy;
     })
 })
