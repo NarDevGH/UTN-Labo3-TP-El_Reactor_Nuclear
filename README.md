@@ -29,7 +29,12 @@
     ```bash
     npm run start:dev
     ```
-Para ejecutar las pruebas unitarias y asegurarte de que el sistema funciona correctamente, ejecuta npm test. Esto correrá todas las pruebas definidas en el proyecto utilizando Jest.
+    3. Para ejecutar las pruebas unitarias y asegurarte de que el sistema funciona correctamente, ejecuta: 
+
+    ```bash
+    npm run test
+    ```
+    Esto correrá todas las pruebas definidas en el proyecto utilizando Jest.
 
 ## DESCRIPCIÓN DEL PROYECTO:
 
@@ -39,9 +44,10 @@ El proyecto consta de un reactor nuclear el cual cuenta con los siguientes objet
 ### Reactor: 
 Es el nucleo de nuestra central nuclear. El mismo se encarga de centralizar el funcionamiento general de la planta. En este podemos encontrar la **temperatura actual**, la cual generará energía. Ademas dependiendo de su variación, el reactor pasará por diferentes estados: el **Estado Normal**, **Estado Criticidad** y **Estado Crítico**. El reactor será observado por **Operarios** o **Directivos** dependiendo su Estado. Utilizaremos **contadores de barras** para contabilizar las **Barras de Control** que refrigeraran el reactor en base al Estado correspondiente. Por otro lado usaremos otros **contadores de estados** que se encargaran de reflejar la cantidad de veces que se realizó un cambio a cada estado. 
 Por otro lado usaremos Facade para centralizar los métodos fundamentales del reactor: 
-    - generarEnergia() : se encargará de devolver la energía termal y neta que producirá el reactor en base a la temperatura ingresada
-    - energiaGeneradaEnXHoras() : se encargará de devolver la energía termal y neta en una determinada cantidad de horas basandose en la temperatura
-    - enfriar() : se encargará de iniciar los metodos de reducción de temperatura en caso de ser necesario, esto ocurre cuando nos encontramos en un Estado Criticidad y Estado Critico 
+- generarEnergia() : se encargará de devolver la energía termal y neta que producirá el reactor en base a la temperatura ingresada
+- energiaGeneradaEnXHoras() : se encargará de devolver la energía termal y neta en una determinada cantidad de horas basandose en la temperatura
+- enfriar() : se encargará de iniciar los metodos de reducción de temperatura en caso de ser necesario, esto ocurre cuando nos encontramos en un Estado Criticidad y Estado Critico 
+- metodos de Add y Delete de los Observadores Operarios y Directivos
 
 ### Estados: 
 En esta sección del proyecto desarrollaremos los métodos de cada posible estado, los cuales compartirán métodos que actuaran en base a las responsabilidad de cada estado: 
@@ -50,23 +56,28 @@ En esta sección del proyecto desarrollaremos los métodos de cada posible estad
     - calcularEnergia() : método de calculo lineal que retornará un valor de energiaTermal y energiaNeta en base a la temperatura ingresada
     - generarEnergia() : método que modificará la salida de calcularEnergia(), el cual es un método de calculo lineal. La tarea de generarEnergia() es servir de ajuste de los valores obtenidos, haciendolo variar en base al estado protagonista, en este estado mantendrá su valor original
      - energiaGeneradaEnXHoras() : método que mediante una determinada cantidad de horas y temperatura retornará la energia neta generada.
+     - eficienciaEnergeticaEnEstado() : Este método se encarga de convertir la energia generada en el estado presente en base a lo establecido para el mismo. En este estado mantendrá el valor original de energia, puesto que es el rango donde actua con normalidad.
 - Estado Criticidad: Este estado tomará protagonismo cuando la temperatura del reactor se encuentre superando los 330 pero manteniendose por debajo de 400. En este rango de temperatura, se establecerá un nuevo método y de los métodos mencionados anteriormente se sobreescribiran unos de la siguiente forma: 
-        - manejoCambioTemperatura() : en este estado, el método actuará de 2 posibles maneras. En el primer caso la temperatura establecida supera el margen que maneja este estado y procederá a delegar la responsabilida al Estado Crítico y elevará el contador de dicho estado. En el segundo caso, utilizará las Barras de Control para reducir la capacidad productiva del reactor en un 80% y retornando la responsabilidad al Estado Normal, junto a lo que elevará su contador de intervención
+    - manejoCambioTemperatura() : en este estado, el método actuará de 2 posibles maneras. En el primer caso la temperatura establecida supera el margen que maneja este estado y procederá a delegar la responsabilida al Estado Crítico y elevará el contador de dicho estado. En el segundo caso, utilizará las Barras de Control para reducir la capacidad productiva del reactor en un 80% y retornando la responsabilidad al Estado Normal, junto a lo que elevará su contador de intervención
     - generarEnergia() : En este estado, el método modificará el resultado de calcularEnergia(), devolviendo el 20% de la energía, correspondiendo a la reducción realizada en manejoCambioTemperatura()
      - notificarOperarios() : Este método se encargará de enviar una **Alerta** a los operarios, una vez que este la temperatura del reactor supere los 330 grados.
+     - eficienciaEnergeticaEnEstado() : En este estado se convertirá la eficiencia energetica a un 20% del valor original, esto se debe a la reducción del 80% establecida en este estado.
 - Estado Critico: Este estado tomará protagonismo cuando la temperatura del reactor se encuentre por encima de los 400 grados. En este rango de temperatura, se establecerá un nuevo método y de los métodos mencionados anteriormente se sobreescribiran unos de la siguiente forma:
     - manejoCambioTemperatura() : en este estado, el método baja la temperatura, usando las barras de control, hasta que la temperatura sea menor a 330, de esta manera, pasando a Estado Normal.
     - generarEnergia() : En este estado, el método modificará el resultado de calcularEnergia(), devolviendo 0, ya que en este estado no se genera energía.
     - notificarDirectivos() : Este método se encargará de enviar una **Alerta** a los directivos, una vez que el reactor se encuentre apagado.
+    - eficienciaEnergeticaEnEstado() : En este estado se neutralizará el valor energético generado puesto que el reactor se apagará.
 ### Observadores: 
 en esta sección se encotrará la estructura de nuestros observadores operarios y directivos, los cuales poseeran los siguientes métodos: 
-    - recibirAlerta() : este método se encarga de recibir la Alerta generada mediante las notificaciones de los estados y las almacenará en un array **alertasRecibidas**
-    - getAlertas() : este método permitirá visualizar las Alertas almacenadas
-    - Sensor: esta seccion se basa en un sensor de temperatura que controlará al reactor y permitirá obtener su temperatura actual en todo momento
+- recibirAlerta() : este método se encarga de recibir la Alerta generada mediante las notificaciones de los estados y las almacenará en un array **alertasRecibidas**
+- getAlertas() : este método permitirá visualizar las Alertas almacenadas
+- Sensor: esta seccion se basa en un sensor de temperatura que controlará al reactor y permitirá obtener su temperatura actual en todo momento
 ### Barras:
 en esta sección se encuentra la estructura básica de las **Barras de Control**, las cuales poseeran el tiempo de vida útil. Este determinará cuanto uso le queda a cada barra que utilizaremos y cual será su rendimiento en la refrigeración del reactor
 ### Alerta: 
 en esta sección se encuentra la estructura básica de las **Alertas** generadas por los estados y obtenidas por los observadores. Las mismas contaran con una variable que almacenará la temperatura al momento de su emisión y un mensaje que brindará información sobre el proceso en que se encuentra el reactor / acción a realizar.
+### Sensor: 
+esta sección se encargará de controlar la temperatura de nuestro reactor, permitiendonos obtenerla en cualquier momento del proceso cuando sea requerido.
 
 ## Principios SOLID y patrones de diseño utilizados
 
