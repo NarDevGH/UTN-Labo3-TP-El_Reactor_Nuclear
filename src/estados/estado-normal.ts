@@ -25,7 +25,7 @@ export default class EstadoNormal extends Estado{
         return reactor.getContadorBarras();
     }
 
-    public eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    public eficienciaEnergeticaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
     {
         return  energia;
     }

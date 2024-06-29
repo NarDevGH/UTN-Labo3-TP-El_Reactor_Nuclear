@@ -27,7 +27,7 @@ export default class EstadoCritico extends Estado {
         return reactor.getContadorBarras()
     }
 
-    public eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    public eficienciaEnergeticaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
     {
         energia.termal = energia.termal * 0;
         energia.neta = energia.neta * 0;

@@ -20,11 +20,11 @@ export abstract class Estado {
         return { termal: energiaTermal , neta: energiaNeta  };
     }
 
-    abstract eficienciaEneregitaEnEstado(energia: ResultadoEnergia):ResultadoEnergia;
+    abstract eficienciaEnergeticaEnEstado(energia: ResultadoEnergia):ResultadoEnergia;
 
     generarEnergia(temperatura: number): ResultadoEnergia {
         const energiaNeta = this.calcularEnergia (temperatura);
-        const energiaRes = this.eficienciaEneregitaEnEstado(energiaNeta);
+        const energiaRes = this.eficienciaEnergeticaEnEstado(energiaNeta);
         return energiaRes;
     }
 
