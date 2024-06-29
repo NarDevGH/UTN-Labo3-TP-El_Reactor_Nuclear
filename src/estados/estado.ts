@@ -20,10 +20,12 @@ export abstract class Estado {
         return { termal: energiaTermal , neta: energiaNeta  };
     }
 
-    // modificacion: tiempo (horas), porcentaje (%)
+    abstract eficienciaEneregitaEnEstado(energia: ResultadoEnergia):ResultadoEnergia;
+
     generarEnergia(temperatura: number): ResultadoEnergia {
-        const resultado = this.calcularEnergia (temperatura);
-        return resultado;
+        const energiaNeta = this.calcularEnergia (temperatura);
+        const energiaRes = this.eficienciaEneregitaEnEstado(energiaNeta);
+        return energiaRes;
     }
 
 
@@ -33,7 +35,7 @@ export abstract class Estado {
         let energiaGenerada = reactor.generarEnergia().neta;
     
         for (let hora = 0; hora < horas; hora++) {
-            reactor.setTemperatura(reactor.getTemperatura()+cambioDeTemperatura)
+            reactor.cambiarTemperatura(reactor.getTemperatura()+cambioDeTemperatura)
             energiaGenerada += reactor.generarEnergia().neta;
         }
     

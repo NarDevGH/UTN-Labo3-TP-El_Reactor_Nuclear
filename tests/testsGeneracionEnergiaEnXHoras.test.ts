@@ -25,7 +25,7 @@ describe("Cantidad de energía neta producida en una determinada cantidad de hor
         let energiaGenerada = reactor.energiaGeneradaEnXHoras(15);
         energiaGenerada = Math.floor(energiaGenerada);
 
-        const energiaAGenerar = 11198 
+        const energiaAGenerar = 3446 
         
         expect(energiaGenerada).toBe(energiaAGenerar);
     })

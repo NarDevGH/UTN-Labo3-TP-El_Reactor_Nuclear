@@ -19,10 +19,16 @@ export default class EstadoCriticidad extends Estado {
 
         } else {
             reactor.getBarrasDeControl().forEach(valor => {
-                while (NuevaTemp > 330) {
-                    NuevaTemp = reactor.getTemperatura() - (valor.getTiempoVida() / 3600) * 100;
-                    reactor.setContadorBarras(reactor.getContadorBarras() + 1)
+                while(valor.porcentajeReduccionEnergia() > 0){
+                    // Reducir temperatura del reactor segun el porcentaje de enfriamento de la barra
+                    NuevaTemp = reactor.getTemperatura() - (reactor.getTemperatura() * valor.porcentajeReduccionEnergia());
+                    if (NuevaTemp < 330) {
+                        //Si la temperatura paso al rango normal, dejar de usar las barras para reducir la temperatura
+                        break;
+                    }
                 }
+                //Por cada barra usada, aumentar el contador
+                reactor.setContadorBarras(reactor.getContadorBarras() + 1)
             });
             reactor.setEstado(new EstadoNormal())
             reactor.setTemperatura(NuevaTemp)
@@ -31,11 +37,11 @@ export default class EstadoCriticidad extends Estado {
         return reactor.getContadorBarras()
     }
 
-    public generarEnergia(temperatura: number): ResultadoEnergia {
-        const resultado = this.calcularEnergia(temperatura);
-        resultado.termal = resultado.termal * 0.2;
-        resultado.neta = resultado.neta * 0.2;
-        return resultado;
+    public eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    {
+        energia.termal = energia.termal * 0.2;
+        energia.neta = energia.neta * 0.2;
+        return  energia;
     }
 
     public notificarOperarios(reactor: Reactor): void{
