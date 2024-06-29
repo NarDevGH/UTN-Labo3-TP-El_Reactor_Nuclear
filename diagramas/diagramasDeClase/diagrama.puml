@@ -1,0 +1,116 @@
+@startuml
+
+'Parámetros PUML
+skinparam linetype ortho
+skinparam arrow {
+    Thickness 1
+}
+skinparam TitleFontSize 20
+
+title **Tp - Planta Nuclear**
+
+class Reactor implements EmiteTemperatura{
+
+    - temperatura: number
+    - observadorOperario: IObservadoEstadoReactor[]
+    - observadorDirectivo: IObservadoEstadoReactor[]
+    - contadorEstNormal: number
+    - contEstCriticidad: number
+    - contEstCritico: number
+    - contadorBarras: number
+    - estado: Estado
+    - barrasDeControl: BarrasControl[]
+
+    + -- getters y setters --
+    + generarEnergia(): ResultadoEnergia
+    + energiaGeneradaEnXHoras(horas: number)
+    + enfriar()
+    + cambiarTemperatura(newTemperatura: number)
+    + addObservadorOperario(observador: IObservadorEstadoReactor)
+    + removeObservadorOperario(observador: IObservadorEstadoReactor)
+    + addObservadorDirectivo(observador:IObservadorEstadoReactor)
+    + removeObservadorDirectivo(observador: IObservadorEstadoReactor)
+} 
+
+interface EmiteTemperatura {
+    + getTemperatura(): number
+}
+
+interface ResultadoEnergia {
+    - termal: number
+    - neta: number
+}
+
+abstract class Estado{
+
+    + calcularEnergia(temperatura:number): ResultadoEnergia
+    {abstract} 
+    + generarEnergia(temperatura: number): ResultadoEnergia
+    + energiaGeneradaEnXHoras(reactor : Reactor, horas: number): number
+    {abstract} manejaCambioTemperatura(reactor: Reactor): number
+}
+
+class EstadoNormal extends Estado {
+
+    + manejaCambioTemperatura(reactor: Reactor): number
+    + 
+}
+
+class EstadoCriticidad extends Estado {
+    + manejaCambioTemperatura(reactor: Reactor): number
+    + eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    + notificarOperarios(reactor: Reactor): void
+}
+
+class EstadoCritico extends Estado {
+    + manejaCambioTemperatura(reactor: Reactor): number
+    + eficienciaEneregitaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
+    + notificarDirectivos(reactor: Reactor): void
+}
+
+interface IObservadorEstadoReactor {
+    + recibirAlerta(alerta:Alerta): void
+    + getAlertas(): Alerta[]
+}
+
+class ObservadorEstadoReactor implements IObservadorEstadoReactor{
+    + recibirAlerta(alerta: Alerta): void
+    + getAlertas(): Alerta[]
+}
+
+class Alerta {
+    - mensaje: String
+    - temp: number
+
+    + -- getters y setters --
+}
+
+class BarrasControl {
+    - tiempoVida: number
+
+    + -- getters y setters --
+    + porcentajeReduccionEnergia(): number
+}
+
+class SensorTemperatura {
+    - emisorTemperatura: null|EmiteTemperatura
+
+    + -- getters y setters --
+    + lecturaDeTemperatura(): number|EmisorDeTemperatura
+}
+
+
+' Relaciones
+
+Reactor *-- Estado
+Reactor o-r- BarrasControl
+SensorTemperatura *--EmiteTemperatura
+EstadoCriticidad <-- Alerta
+EstadoCritico <-- Alerta
+IObservadorEstadoReactor <-- Alerta
+Estado <.. ResultadoEnergia
+Reactor <.. ResultadoEnergia
+Reactor *-- IObservadorEstadoReactor
+
+
+@enduml
