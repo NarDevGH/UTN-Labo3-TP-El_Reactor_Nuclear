@@ -1,8 +1,3 @@
-import { Estado } from "../src/estados/estado";
-import { BarrasControl } from "../src/barras/barras_control";
-import EmiteTemperatura from "../src/types/emiteTemperatura";
-import { IObservadorEstadoReactor } from "../src/observadores/IObservadorEstadoReactor";
-import { ResultadoEnergia } from "../src/types/resultado_energia";
 import Reactor from "../src/reactor/reactor";
 import EstadoNormal from "../src/estados/estado-normal";
 
@@ -29,11 +24,6 @@ describe('Reactor', () => {
     expect(instance.energiaGeneradaEnXHoras).toBeTruthy();
   });
   
-  it('should have a method enfriar()', () => {
-    // instance.enfriar();
-    expect(instance.enfriar).toBeTruthy();
-  });
-  
   it('should have a method cambiarTemperatura()', () => {
     // instance.cambiarTemperatura(newTemperatura);
     expect(instance.cambiarTemperatura).toBeTruthy();
@@ -46,7 +36,7 @@ describe('Reactor', () => {
   
   it('should have a method removeObservadorOperario()', () => {
     // instance.removeObservadorOperario(observador);
-    expect(instance.removeObservadorDirectivo).toBeTruthy();
+    expect(instance.removeObservadorOperario).toBeTruthy();
   });
   
   it('should have a method addObservadorDirectivo()', () => {
@@ -138,4 +128,8 @@ describe('Reactor', () => {
     // instance.setContadorBarras(value);
     expect(instance.setContadorBarras).toBeTruthy();
   });
+  
+  it("should have a method enfriar()",()=>{
+    expect(instance.enfriar).toBeTruthy();
+  })
 });
