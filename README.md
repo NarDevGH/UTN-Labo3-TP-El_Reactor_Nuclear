@@ -16,19 +16,19 @@
 - TypeScript
 
 ## COMO EJECUTAR PROYECTO:
-1. Clona el proyecto en una carpeta de tu PC o Crear un Codespace.
-    1. Clonar Proyecto:
+1. Clona el proyecto en una carpeta de tu PC.
+
     ![failed_to_load_img](./imgs/clonar_proyecto.PNG)
-    2. Crear Codespace:
-    ![failed_to_load_img](./imgs/crear_codespace.PNG)
-2. Desde una terminal que este posicionado en el directorio del proyecto, ejecutar el siguiente comando para instalar los paquetes:
-```bash
-npm i
-```
-3. Una vez haya finalizado de instalar todos los paquetes, ejecutar el siguiente commando para iniciar el programa:
-```bash
-npm run start:dev
-```
+2. Desde una terminal que este posicionado en el directorio del proyecto:
+    1. Instalar los paquetes necesarios para el proyecto.
+    ```bash
+    npm i TypeScript
+    npm i Jest
+    ```    
+    2. Una vez haya finalizado de instalar todos los paquetes, ejecutar el siguiente commando para iniciar el programa.
+    ```bash
+    npm run start:dev
+    ```
 Para ejecutar las pruebas unitarias y asegurarte de que el sistema funciona correctamente, ejecuta npm test. Esto correrá todas las pruebas definidas en el proyecto utilizando Jest.
 
 ## DESCRIPCIÓN DEL PROYECTO:
