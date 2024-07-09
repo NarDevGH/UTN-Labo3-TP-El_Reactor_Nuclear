@@ -71,7 +71,6 @@ En esta sección del proyecto desarrollaremos los métodos de cada posible estad
 en esta sección se encotrará la estructura de nuestros observadores operarios y directivos, los cuales poseeran los siguientes métodos: 
 - recibirAlerta() : este método se encarga de recibir la Alerta generada mediante las notificaciones de los estados y las almacenará en un array **alertasRecibidas**
 - getAlertas() : este método permitirá visualizar las Alertas almacenadas
-- Sensor: esta seccion se basa en un sensor de temperatura que controlará al reactor y permitirá obtener su temperatura actual en todo momento
 ### Barras:
 en esta sección se encuentra la estructura básica de las **Barras de Control**, las cuales poseeran el tiempo de vida útil. Este determinará cuanto uso le queda a cada barra que utilizaremos y cual será su rendimiento en la refrigeración del reactor
 ### Alerta: 
