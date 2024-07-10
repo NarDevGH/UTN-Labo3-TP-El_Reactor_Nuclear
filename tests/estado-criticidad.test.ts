@@ -34,8 +34,8 @@ describe('EstadoCriticidad', () => {
       neta: 300
     }
     const expectedEnergia: ResultadoEnergia = {
-      termal: 240,
-      neta: 240
+      termal: 60,
+      neta: 60
     }
 
     const energiaRes = instance.eficienciaEnergeticaEnEstado(energia);

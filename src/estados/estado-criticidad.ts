@@ -39,8 +39,8 @@ export default class EstadoCriticidad extends Estado {
 
     public eficienciaEnergeticaEnEstado(energia: ResultadoEnergia): ResultadoEnergia
     {
-        energia.termal = energia.termal * 0.8;
-        energia.neta = energia.neta * 0.8;
+        energia.termal = energia.termal * 0.2;
+        energia.neta = energia.neta * 0.2;
         return  energia;
     }
 
